@@ -41,7 +41,7 @@ This project demonstrates the use of key SQL concepts:
 - GROUP BY and HAVING clauses  
 - Subqueries  
 - Date Functions: MONTH(), YEAR(), DATEADD(), GETDATE()  
-- Filtering and Sorting: WHERE, ORDER BY, TOP N  
+- Filtering and Sorting: WHERE, ORDER BY, TOP
 
 ---
 
