@@ -1,0 +1,87 @@
+Query 1 — Total Revenue Per Product
+sqlSELECT p.ProductName,
+       SUM(o.Quantity * p.Price) AS TotalRevenue
+FROM Orders o
+JOIN Products p ON o.ProductID = p.ProductID
+GROUP BY p.ProductName
+ORDER BY TotalRevenue DESC;
+
+Query 2 — Top 3 Customers by Spending
+SELECT TOP 3
+       c.CustomerName,
+       SUM(o.Quantity * p.Price) AS TotalSpent
+FROM Orders o
+JOIN Customers c ON o.CustomerID = c.CustomerID
+JOIN Products p ON o.ProductID = p.ProductID
+GROUP BY c.CustomerName
+ORDER BY TotalSpent DESC;
+
+Query 3 — Monthly Sales Trend
+SELECT MONTH(OrderDate) AS Month,
+       YEAR(OrderDate) AS Year,
+       SUM(o.Quantity * p.Price) AS MonthlySales
+FROM Orders o
+JOIN Products p ON o.ProductID = p.ProductID
+GROUP BY YEAR(OrderDate), MONTH(OrderDate)
+ORDER BY Year, Month;
+
+Query 4 — Revenue by Product Category
+SELECT p.Category,
+       SUM(o.Quantity * p.Price) AS CategoryRevenue
+FROM Orders o
+JOIN Products p ON o.ProductID = p.ProductID
+GROUP BY p.Category
+ORDER BY CategoryRevenue DESC;
+
+Query 5 — Customers Who Never Ordered
+SELECT CustomerName
+FROM Customers
+WHERE CustomerID NOT IN (
+    SELECT DISTINCT CustomerID FROM Orders
+);
+
+Query6 — Most Ordered Product
+SELECT TOP 1
+       p.ProductName,
+       SUM(o.Quantity) AS TotalQuantitySold
+FROM Orders o
+JOIN Products p ON o.ProductID = p.ProductID
+GROUP BY p.ProductName
+ORDER BY TotalQuantitySold DESC;
+
+Query 7 — Average Order Value per Customer
+SELECT c.CustomerName,
+       AVG(o.Quantity * p.Price) AS AvgOrderValue
+FROM Orders o
+JOIN Customers c ON o.CustomerID = c.CustomerID
+JOIN Products p ON o.ProductID = p.ProductID
+GROUP BY c.CustomerName
+ORDER BY AvgOrderValue DESC;
+
+Query 8 — City Wise Total Revenue
+SELECT c.City,
+       SUM(o.Quantity * p.Price) AS CityRevenue
+FROM Orders o
+JOIN Customers c ON o.CustomerID = c.CustomerID
+JOIN Products p ON o.ProductID = p.ProductID
+GROUP BY c.City
+ORDER BY CityRevenue DESC;
+
+Query 9 — Orders in Last 3 Months
+SELECT o.OrderID,
+       c.CustomerName,
+       p.ProductName,
+       o.OrderDate
+FROM Orders o
+JOIN Customers c ON o.CustomerID = c.CustomerID
+JOIN Products p ON o.ProductID = p.ProductID
+WHERE o.OrderDate >= DATEADD(MONTH, -3, GETDATE());
+
+Query 10 — Products With Revenue Above 20,000
+SELECT p.ProductName,
+       SUM(o.Quantity * p.Price) AS TotalRevenue
+FROM Orders o
+JOIN Products p ON o.ProductID = p.ProductID
+GROUP BY p.ProductName
+HAVING SUM(o.Quantity * p.Price) > 20000
+ORDER BY TotalRevenue DESC;
