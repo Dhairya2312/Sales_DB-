@@ -1,0 +1,68 @@
+-- Create Database
+CREATE DATABASE RetailSalesDB;
+USE RetailSalesDB;
+
+-- Table 1: Customers
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(100),
+    City VARCHAR(50),
+    Age INT
+);
+
+-- Table 2: Products
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Category VARCHAR(50),
+    Price DECIMAL(10,2)
+);
+
+-- Table 3: Orders
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT FOREIGN KEY REFERENCES Customers(CustomerID),
+    ProductID INT FOREIGN KEY REFERENCES Products(ProductID),
+    Quantity INT,
+    OrderDate DATE
+);
+
+-- Insert Customers
+INSERT INTO Customers VALUES
+(1, 'Rahul Shah', 'Ahmedabad', 28),
+(2, 'Priya Patel', 'Surat', 34),
+(3, 'Amit Mehta', 'Vadodara', 25),
+(4, 'Neha Joshi', 'Rajkot', 30),
+(5, 'Rohan Desai', 'Ahmedabad', 22),
+(6, 'Sneha Trivedi', 'Surat', 27),
+(7, 'Karan Modi', 'Gandhinagar', 35),
+(8, 'Pooja Rao', 'Vadodara', 29);
+
+-- Insert Products
+INSERT INTO Products VALUES
+(1, 'Laptop', 'Electronics', 45000),
+(2, 'Mobile', 'Electronics', 18000),
+(3, 'Headphones', 'Electronics', 2500),
+(4, 'Desk Chair', 'Furniture', 8000),
+(5, 'Notebook', 'Stationery', 150),
+(6, 'Pen Set', 'Stationery', 250),
+(7, 'Backpack', 'Accessories', 1200),
+(8, 'Water Bottle', 'Accessories', 400);
+
+-- Insert Orders
+INSERT INTO Orders VALUES
+(1,  1, 1, 1, '2024-01-05'),
+(2,  2, 2, 2, '2024-01-10'),
+(3,  3, 3, 3, '2024-02-15'),
+(4,  4, 4, 1, '2024-02-20'),
+(5,  5, 5, 5, '2024-03-01'),
+(6,  1, 2, 1, '2024-03-10'),
+(7,  2, 1, 1, '2024-04-05'),
+(8,  6, 7, 2, '2024-04-12'),
+(9,  7, 3, 4, '2024-05-01'),
+(10, 8, 8, 6, '2024-05-15'),
+(11, 3, 4, 2, '2024-06-01'),
+(12, 4, 2, 1, '2024-06-20'),
+(13, 5, 6, 3, '2024-07-10'),
+(14, 6, 1, 1, '2024-07-25'),
+(15, 7, 5, 10,'2024-08-01');
