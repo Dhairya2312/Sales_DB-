@@ -1,6 +1,8 @@
 -- Create Database
 CREATE DATABASE RetailSalesDB;
-USE RetailSalesDB;
+
+USE RetailSalesDB
+GO;
 
 -- Table 1: Customers
 CREATE TABLE Customers (
