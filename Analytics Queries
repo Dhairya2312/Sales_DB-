@@ -1,5 +1,5 @@
 Query 1 — Total Revenue Per Product
-sqlSELECT p.ProductName,
+SELECT p.ProductName,
        SUM(o.Quantity * p.Price) AS TotalRevenue
 FROM Orders o
 JOIN Products p ON o.ProductID = p.ProductID
